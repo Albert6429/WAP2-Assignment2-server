@@ -281,5 +281,19 @@ describe("userTest", () => {
                     });
             });
         });
+
+        describe("when the id is invalid", () => {
+            it("should return the NOT exist message", done => {
+                request(server)
+                    .delete("/deleteUser/jojo")
+                    .set("Accept", "application/json")
+                    .expect("Content-Type", /json/)
+                    .expect(200)
+                    .end((err, res) => {
+                        expect(res.body.message).equals("The id does not exist");
+                        done(err);
+                    });
+            });
+        });
     });
 });
