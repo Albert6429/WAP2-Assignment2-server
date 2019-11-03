@@ -97,4 +97,21 @@ describe("userTest", () => {
                 });
         });
     });
+
+    describe("GET /users/:username", () => {
+        describe("when the username is valid", () => {
+            it("should return the matching user", done => {
+                request(server)
+                    .get(`/users/${validName}`)
+                    .set("Accept", "application/json")
+                    .expect("Content-Type", /json/)
+                    .expect(200)
+
+                    .end((err, res) => {
+                        expect(res.body).to.have.property("username", "GYF");
+                        done(err);
+                    });
+            });
+        });
+    });
 });
