@@ -172,4 +172,21 @@ describe("userTest", () => {
             });
         });
     });
+    describe("POST /log", () => {
+        describe("when the username is wrong", () => {
+            it("should return the username NOT existed message", () => {
+                const user = {
+                    username: "ZXL",
+                    password: "123",
+                };
+                return request(server)
+                    .post(`/log`)
+                    .send(user)
+                    .expect(200)
+                    .then(res => {
+                        expect(res.body.message).equals("The username does not exist");
+                    });
+            });
+        });
+    });
 });
