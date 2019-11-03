@@ -260,7 +260,7 @@ describe("userTest", () => {
 
     describe("DELETE /deleteUser/:id", () => {
         describe("when the id is valid", () => {
-            it("should return a message", () => {
+            it("should return a message and update", () => {
                 return request(server)
                     .delete(`/deleteUser/${validID}`)
                     .expect(200)
@@ -268,6 +268,16 @@ describe("userTest", () => {
                         expect(resp.body).to.include({
                             message: "The user is deleted"
                         });
+                    });
+            });
+            after(() => {
+                return request(server)
+                    .get(`/users`)
+                    .set("Accept", "application/json")
+                    .expect("Content-Type", /json/)
+                    .expect(200)
+                    .then(resp => {
+                        expect(resp.body.length).to.equal(1);
                     });
             });
         });
