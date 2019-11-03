@@ -155,5 +155,21 @@ describe("userTest", () => {
                     });
             });
         });
+        describe("when the username used by other users", () => {
+            it("should return the username existed message", () => {
+                const user = {
+                    username: "GYF",
+                    password: "123",
+                    email: "123456789@qq.com",
+                };
+                return request(server)
+                    .post(`/reg`)
+                    .send(user)
+                    .expect(200)
+                    .then(res => {
+                        expect(res.body.message).equals("The username already existed");
+                    });
+            });
+        });
     });
 });
