@@ -65,4 +65,36 @@ describe("userTest", () => {
             console.log(error);
         }
     });
+    describe("GET /users", () => {
+        it("should GET all the users", done => {
+            request(server)
+                .get("/users")
+                .set("Accept", "application/json")
+                .expect("Content-Type", /json/)
+                .expect(200)
+                .end((err, res) => {
+                    try {
+                        expect(res.body).to.be.a("array");
+                        expect(res.body.length).to.equal(2);
+                        let result = _.map(res.body, user => {
+                            return {
+                                username: user.username,
+                                email: user.email
+                            };
+                        });
+                        expect(result).to.deep.include({
+                            username: "GYF",
+                            email: "987654321@qq.com"
+                        });
+                        expect(result).to.deep.include({
+                            username: "SMX",
+                            email: "192837465@qq.com"
+                        });
+                        done();
+                    } catch (e) {
+                        done(e);
+                    }
+                });
+        });
+    });
 });
