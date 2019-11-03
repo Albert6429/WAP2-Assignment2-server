@@ -497,4 +497,19 @@ describe("postTest", () => {
             });
         });
     });
+
+    describe("DELETE /deletePost/:id", () => {
+        describe("when the id is valid", () => {
+            it("should return a message", () => {
+                return request(server)
+                    .delete(`/deletePost/${validPostID}`)
+                    .expect(200)
+                    .then(resp => {
+                        expect(resp.body).to.include({
+                            message: "The post is deleted"
+                        });
+                    });
+            });
+        });
+    });
 });
