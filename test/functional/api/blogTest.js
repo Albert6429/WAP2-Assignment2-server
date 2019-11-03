@@ -3,12 +3,13 @@ const expect = chai.expect;
 const request = require("supertest");
 const MongoMemoryServer = require("mongodb-memory-server").MongoMemoryServer;
 const User = require("../../../models/user.model");
+const Post = require("../../../models/posts.model");
 const mongoose = require("mongoose");
 
 const _ = require("lodash");
 let server;
 let mongod;
-let db, validID,validName
+let db, validID,validName,validPostID,validTitle;
 
 describe("userTest", () => {
     before(async () => {
@@ -295,5 +296,62 @@ describe("userTest", () => {
                     });
             });
         });
+    });
+});
+
+describe("postTest", () => {
+    before(async () => {
+        try {
+            mongod = new MongoMemoryServer({
+                instance: {
+                    port: 27017,
+                    dbPath: "./test/database",
+                    dbName: "blog"
+                }
+            });
+            await mongod.getConnectionString();
+
+            mongoose.connect("mongodb://localhost:27017/blog", {
+                useNewUrlParser: true,
+                useUnifiedTopology: true
+            });
+            server = require("../../../bin/www");
+            db = mongoose.connection;
+        } catch (error) {
+            console.log(error);
+        }
+    });
+
+    after(async () => {
+        try {
+        } catch (error) {
+            console.log(error);
+        }
+    });
+
+    beforeEach(async () => {
+        try {
+            await Post.deleteMany({});
+            let post = new Post();
+            post.title = "Diary";
+            post.author = "GYF";
+            post.content = "I am very happy today";
+            post.likes = 0;
+            post.view = 0;
+            await post.save();
+            let post2 = new Post();
+            post2.title = "Diary2";
+            post2.author = "SMX";
+            post2.content = "I am very sad today";
+            post2.likes = 0;
+            post2.view = 0;
+            await post2.save();
+            let post3 = new Post();
+            post3 = await Post.findOne({title: 'Diary'});
+            validPostID = post3._id;
+            validTitle = post3.title;
+        } catch (error) {
+            console.log(error);
+        }
     });
 });
