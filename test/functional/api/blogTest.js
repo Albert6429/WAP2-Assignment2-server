@@ -257,4 +257,19 @@ describe("userTest", () => {
             });
         });
     });
+
+    describe("DELETE /deleteUser/:id", () => {
+        describe("when the id is valid", () => {
+            it("should return a message", () => {
+                return request(server)
+                    .delete(`/deleteUser/${validID}`)
+                    .expect(200)
+                    .then(resp => {
+                        expect(resp.body).to.include({
+                            message: "The user is deleted"
+                        });
+                    });
+            });
+        });
+    });
 });
