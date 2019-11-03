@@ -387,4 +387,20 @@ describe("postTest", () => {
                 });
         });
     });
+
+    describe("GET /posts/:id", () => {
+        describe("when the id is valid", () => {
+            it("should return the matching post", done => {
+                request(server)
+                    .get(`/posts/${validPostID}`)
+                    .set("Accept", "application/json")
+                    .expect("Content-Type", /json/)
+                    .expect(200)
+                    .end((err, res) => {
+                        expect(res.body.data).to.have.property("title", "Diary");
+                        done(err);
+                    });
+            });
+        });
+    });
 });
