@@ -354,4 +354,37 @@ describe("postTest", () => {
             console.log(error);
         }
     });
+
+    describe("GET /posts", () => {
+        it("should GET all the posts", done => {
+            request(server)
+                .get("/posts")
+                .set("Accept", "application/json")
+                .expect("Content-Type", /json/)
+                .expect(200)
+                .end((err, res) => {
+                    try {
+                        expect(res.body).to.be.a("array");
+                        expect(res.body.length).to.equal(2);
+                        let result = _.map(res.body, post => {
+                            return {
+                                title: post.title,
+                                author: post.author
+                            };
+                        });
+                        expect(result).to.deep.include({
+                            title: "Diary",
+                            author: "GYF"
+                        });
+                        expect(result).to.deep.include({
+                            title: "Diary2",
+                            author: "SMX"
+                        });
+                        done();
+                    } catch (e) {
+                        done(e);
+                    }
+                });
+        });
+    });
 });
