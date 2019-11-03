@@ -416,4 +416,24 @@ describe("postTest", () => {
             });
         });
     });
+
+    describe("POST /posts", () => {
+        describe("when the id is valid", () => {
+            it("should register successfully", () => {
+                const post = {
+                    title: "Hello World",
+                    author: "Jack",
+                    content: "Hello World",
+                };
+                return request(server)
+                    .post(`/posts`)
+                    .send(post)
+                    .expect(200)
+                    .then(res => {
+                        expect(res.body.message).equals("Post successfully");
+                        validID = res.body.data._id;
+                    });
+            });
+        });
+    });
 });
