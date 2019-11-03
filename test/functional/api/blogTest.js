@@ -460,7 +460,7 @@ describe("postTest", () => {
 
     describe("PUT /posts/:id/likes", () => {
         describe("when the id is valid", () => {
-            it("should return a message", () => {
+            it("should return a message and the likes by 1", () => {
                 return request(server)
                     .put(`/posts/${validPostID}/likes`)
                     .expect(200)
@@ -468,6 +468,16 @@ describe("postTest", () => {
                         expect(resp.body).to.include({
                             message: "The post is liked successfully!"
                         });
+                        expect(resp.body.data).to.have.property("likes", 1);
+                    });
+            });
+            after(() => {
+                return request(server)
+                    .get(`/posts/${validPostID}`)
+                    .set("Accept", "application/json")
+                    .expect("Content-Type", /json/)
+                    .expect(200)
+                    .then(resp => {
                         expect(resp.body.data).to.have.property("likes", 1);
                     });
             });
