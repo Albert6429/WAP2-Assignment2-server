@@ -482,5 +482,19 @@ describe("postTest", () => {
                     });
             });
         });
+
+        describe("when the id is invalid", () => {
+            it("should return the NOT exist message", done => {
+                request(server)
+                    .put("/posts/jojo/likes")
+                    .set("Accept", "application/json")
+                    .expect("Content-Type", /json/)
+                    .expect(200)
+                    .end((err, res) => {
+                        expect(res.body.message).equals("The post does not exist");
+                        done(err);
+                    });
+            });
+        });
     });
 });
