@@ -419,7 +419,7 @@ describe("postTest", () => {
 
     describe("POST /posts", () => {
         describe("when the id is valid", () => {
-            it("should register successfully", () => {
+            it("should register successfully and update", () => {
                 const post = {
                     title: "Hello World",
                     author: "Jack",
@@ -432,6 +432,14 @@ describe("postTest", () => {
                     .then(res => {
                         expect(res.body.message).equals("Post successfully");
                         validID = res.body.data._id;
+                    });
+            });
+            after(() => {
+                return request(server)
+                    .get(`/posts/${validID}`)
+                    .expect(200)
+                    .then(res => {
+                        expect(res.body.data).to.have.property("title", "Hello World");
                     });
             });
         });
