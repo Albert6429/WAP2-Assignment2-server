@@ -113,5 +113,18 @@ describe("userTest", () => {
                     });
             });
         });
+        describe("when the username is invalid", () => {
+            it("should return the NOT found message", done => {
+                request(server)
+                    .get("/users/jojo")
+                    .set("Accept", "application/json")
+                    .expect("Content-Type", /json/)
+                    .expect(200)
+                    .end((err, res) => {
+                        expect(res.body.message).equals("The user does not exist");
+                        done(err);
+                    });
+            });
+        });
     });
 });
