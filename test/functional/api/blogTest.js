@@ -500,7 +500,7 @@ describe("postTest", () => {
 
     describe("DELETE /deletePost/:id", () => {
         describe("when the id is valid", () => {
-            it("should return a message", () => {
+            it("should return a message and update", () => {
                 return request(server)
                     .delete(`/deletePost/${validPostID}`)
                     .expect(200)
@@ -508,6 +508,16 @@ describe("postTest", () => {
                         expect(resp.body).to.include({
                             message: "The post is deleted"
                         });
+                    });
+            });
+            after(() => {
+                return request(server)
+                    .get(`/posts`)
+                    .set("Accept", "application/json")
+                    .expect("Content-Type", /json/)
+                    .expect(200)
+                    .then(resp => {
+                        expect(resp.body.length).to.equal(1);
                     });
             });
         });
