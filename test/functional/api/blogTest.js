@@ -457,4 +457,20 @@ describe("postTest", () => {
             });
         });
     });
+
+    describe("PUT /posts/:id/likes", () => {
+        describe("when the id is valid", () => {
+            it("should return a message", () => {
+                return request(server)
+                    .put(`/posts/${validPostID}/likes`)
+                    .expect(200)
+                    .then(resp => {
+                        expect(resp.body).to.include({
+                            message: "The post is liked successfully!"
+                        });
+                        expect(resp.body.data).to.have.property("likes", 1);
+                    });
+            });
+        });
+    });
 });
