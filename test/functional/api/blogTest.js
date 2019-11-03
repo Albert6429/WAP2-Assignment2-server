@@ -219,4 +219,19 @@ describe("userTest", () => {
             });
         });
     });
+    describe("PUT /users/:username/followed", () => {
+        describe("when the username is valid", () => {
+            it("should return a message", () => {
+                return request(server)
+                    .put(`/users/${validName}/followed`)
+                    .expect(200)
+                    .then(resp => {
+                        expect(resp.body).to.include({
+                            message: "The user is followed successfully!"
+                        });
+                        expect(resp.body.data).to.have.property("followed", 1);
+                    });
+            });
+        });
+    });
 });
