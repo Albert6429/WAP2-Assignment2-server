@@ -188,5 +188,20 @@ describe("userTest", () => {
                     });
             });
         });
+        describe("when the password is wrong", () => {
+            it("should return the WRONG password message", () => {
+                const user = {
+                    username: "GYF",
+                    password: "12345",
+                };
+                return request(server)
+                    .post(`/log`)
+                    .send(user)
+                    .expect(200)
+                    .then(res => {
+                        expect(res.body.message).equals("The password is wrong");
+                    });
+            });
+        });
     });
 });
