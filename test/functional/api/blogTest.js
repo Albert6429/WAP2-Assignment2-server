@@ -221,7 +221,7 @@ describe("userTest", () => {
     });
     describe("PUT /users/:username/followed", () => {
         describe("when the username is valid", () => {
-            it("should return a message", () => {
+            it("should return a message and the user followed by 1", () => {
                 return request(server)
                     .put(`/users/${validName}/followed`)
                     .expect(200)
@@ -230,6 +230,16 @@ describe("userTest", () => {
                             message: "The user is followed successfully!"
                         });
                         expect(resp.body.data).to.have.property("followed", 1);
+                    });
+            });
+            after(() => {
+                return request(server)
+                    .get(`/users/${validName}`)
+                    .set("Accept", "application/json")
+                    .expect("Content-Type", /json/)
+                    .expect(200)
+                    .then(resp => {
+                        expect(resp.body).to.have.property("followed", 1);
                     });
             });
         });
