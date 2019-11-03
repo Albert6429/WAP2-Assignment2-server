@@ -127,4 +127,33 @@ describe("userTest", () => {
             });
         });
     });
+
+    describe("POST /reg", () => {
+        describe("when the username is not used", () => {
+            it("should register successfully and update", () => {
+                const user = {
+                    username: "Nancy",
+                    password: "123",
+                    email: "123456789@qq.com",
+                };
+                return request(server)
+                    .post(`/reg`)
+                    .send(user)
+                    .expect(200)
+                    .then(res => {
+                        expect(res.body.message).equals("Register successfully");
+                        validName = res.body.data.username;
+                    });
+            });
+            after(() => {
+                return request(server)
+                    .get(`/users/${validName}`)
+                    .expect(200)
+                    .then(res => {
+                        expect(res.body).to.have.property("username", "Nancy");
+                        expect(res.body).to.have.property("email", "123456789@qq.com");
+                    });
+            });
+        });
+    });
 });
