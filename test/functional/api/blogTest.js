@@ -203,5 +203,20 @@ describe("userTest", () => {
                     });
             });
         });
+        describe("when the username and password are both correct", () => {
+            it("should return login successfully message", () => {
+                const user = {
+                    username: "GYF",
+                    password: "123",
+                };
+                return request(server)
+                    .post(`/log`)
+                    .send(user)
+                    .expect(200)
+                    .then(res => {
+                        expect(res.body.message).equals("Login successfully");
+                    });
+            });
+        });
     });
 });
