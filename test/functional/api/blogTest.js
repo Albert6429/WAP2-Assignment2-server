@@ -304,7 +304,7 @@ describe("userTest", () => {
 describe("postTest", () => {
   before(async () => {
     try {
-      mongod = new MongoMemoryServer({
+      mongod = new MongoMemoryServer({ debug: true },{
         instance: {
           port: 27017,
           dbPath: "./test/database",
