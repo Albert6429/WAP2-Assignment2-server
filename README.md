@@ -1,4 +1,4 @@
-# Assignment 1 - Agile Software Practice.
+# Assignment 2 - Agile Software Practice.
 
 Name: Yifan Gu 20086429
 
@@ -119,8 +119,11 @@ This is a simple microblog which is called 'Creative Land'. It is designed for u
 
 ~~~
 
-[ Markdown Tip: By wrapping the test results in fences (~~~), GitHub will display it in a 'box' and preserve any formatting.]
+##Pipeline status & Coverage Report
+[![pipeline status](https://gitlab.com/Albert6429/mymicroblog-cicd/badges/master/pipeline.svg)](https://gitlab.com/Albert6429/mymicroblog-cicd/commits/master)
+[![coverage report](https://gitlab.com/Albert6429/mymicroblog-cicd/badges/master/coverage.svg)](https://gitlab.com/Albert6429/mymicroblog-cicd/commits/master)
 
+[ Markdown Tip: By wrapping the test results in fences (~~~), GitHub will display it in a 'box' and preserve any formatting.]
 
 
 [datamodel]: ./public/images/model.png
