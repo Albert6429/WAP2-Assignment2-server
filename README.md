@@ -2,6 +2,9 @@
 
 Name: Yifan Gu 20086429
 
+[![pipeline status](https://gitlab.com/Albert6429/mymicroblog-cicd/badges/master/pipeline.svg)](https://gitlab.com/Albert6429/mymicroblog-cicd/commits/master)
+[![coverage report](https://gitlab.com/Albert6429/mymicroblog-cicd/badges/master/coverage.svg)](https://gitlab.com/Albert6429/mymicroblog-cicd/commits/master)
+
 ## Overview.
 
 This is a simple microblog which is called 'Creative Land'. It is designed for users to share stories about their lives. Users can register their own accounts and post articles. One user can get 'followed' by another user or add a 'like' for a good post.
@@ -118,10 +121,6 @@ This is a simple microblog which is called 'Creative Land'. It is designed for u
   21 passing (2s)
 
 ~~~
-
-##Pipeline status & Coverage Report
-[![pipeline status](https://gitlab.com/Albert6429/mymicroblog-cicd/badges/master/pipeline.svg)](https://gitlab.com/Albert6429/mymicroblog-cicd/commits/master)
-[![coverage report](https://gitlab.com/Albert6429/mymicroblog-cicd/badges/master/coverage.svg)](https://gitlab.com/Albert6429/mymicroblog-cicd/commits/master)
 
 [ Markdown Tip: By wrapping the test results in fences (~~~), GitHub will display it in a 'box' and preserve any formatting.]
 
