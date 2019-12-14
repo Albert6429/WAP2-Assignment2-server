@@ -36,11 +36,15 @@ router.register = function(req, res) {
   user.upvotes = req.body.upvotes
 
   User.findOne({ "username" : req.body.username },function(err, data) {
+    let correctEmail=/^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/
     if(err){
       res.send(err)
     }
     else if (data!= null){
       res.json({message: "The username already existed"})
+    }
+    else if (!correctEmail.test(user.email)){
+      res.json({message: "Please enter a correct email address"})
     }
     else{
       user.save(function (err) {

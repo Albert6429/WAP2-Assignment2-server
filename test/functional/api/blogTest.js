@@ -420,7 +420,7 @@ describe("postTest", () => {
     })
   })
 
-  describe("POST /posts", () => {
+  describe("POST /writeposts", () => {
     describe("when the id is valid", () => {
       it("should register successfully and update", () => {
         const post = {
@@ -429,7 +429,7 @@ describe("postTest", () => {
           content: "Hello World",
         }
         return request(server)
-          .post("/posts")
+          .post("/writeposts")
           .send(post)
           .expect(200)
           .then(res => {

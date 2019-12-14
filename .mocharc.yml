@@ -1,2 +1,3 @@
 file:
-  - ./test/functional/api/blogTest.js
+  - test/functional/api/blogTest.js
+require: '@babel/register'

@@ -5,6 +5,7 @@ let favicon = require("serve-favicon")
 let logger = require("morgan")
 let cookieParser = require("cookie-parser")
 let bodyParser = require("body-parser")
+let cors = require("cors")
 
 let routes = require("./routes/index")
 let users = require("./routes/users")
@@ -14,6 +15,7 @@ let posts = require("./routes/posts")
 let app = express()
 app.set("views", path.join(__dirname, "views"))
 app.set("view engine", "ejs")
+
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
@@ -22,6 +24,8 @@ if (process.env.NODE_ENV !== "test") {
   app.use(logger("dev"))
 }
 app.use("/", routes)
+app.use(cors())
+
 
 
 //Our Custom Routes
@@ -31,7 +35,7 @@ app.get("/posts", posts.findAllPosts)
 app.get("/posts/:id", posts.findOnePost)
 app.post("/reg", users.register)
 app.post("/log", users.login)
-app.post("/posts", posts.writePosts)
+app.post("/writeposts", posts.writePosts)
 app.put("/users/:username/followed", users.incrementFollowed)
 app.put("/posts/:id/likes", posts.incrementLikes)
 app.delete("/deleteUser/:id", users.deleteUser)
