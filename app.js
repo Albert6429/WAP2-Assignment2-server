@@ -20,7 +20,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, "public")))
-if (process.env.NODE_ENV !== "test") {  
+if (process.env.NODE_ENV !== "test") {
   app.use(logger("dev"))
 }
 app.use("/", routes)
@@ -74,6 +74,23 @@ app.use(function(err, req, res, next) {
     error: {}
   })
 })
+const mongoose = require('mongoose')
+const dotenv = require('dotenv')
+dotenv.config()
+const uri = `${process.env.MONGO_URI}${process.env.MONGO_DB}`
+console.log(uri)
+mongoose.connect(uri, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
 
 
+var db = mongoose.connection
+
+db.on('error', (err) => {
+  console.log('connection error', err)
+})
+db.once('open', function () {
+  console.log('connected to database')
+})
 module.exports = app

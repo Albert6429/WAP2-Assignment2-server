@@ -1,5 +1,5 @@
 let mongoose = require("mongoose")
-mongoose.connect("mongodb://localhost/blog")
+
 
 
 let PostSchema = new mongoose.Schema({
