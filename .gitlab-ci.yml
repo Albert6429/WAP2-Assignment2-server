@@ -56,7 +56,7 @@ pages:
 
 deploy_staging:
   image: ruby:latest
-    only:
+  only:
       - develop
       - master
   stage: deploy
