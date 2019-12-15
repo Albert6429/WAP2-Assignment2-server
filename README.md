@@ -1,4 +1,4 @@
-# Assignment 2 - Agile Software Practice.
+# WAP2-Assignment2-server
 
 Name: Yifan Gu 20086429
 
