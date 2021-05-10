@@ -60,7 +60,7 @@
     "dotenv": "^8.2.0",
     "eslint": "^6.5.1",
     "eslint-watch": "^6.0.1",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "mocha": "^6.2.0",
     "mongodb-memory-server": "^5.2.7",
     "nock": "^11.7.0",
